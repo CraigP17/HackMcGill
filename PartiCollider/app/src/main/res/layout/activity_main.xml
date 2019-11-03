@@ -8,28 +8,71 @@
     tools:context=".MainActivity">
 
     <ImageView
+        android:id="@+id/particle5"
+        android:layout_width="33dp"
+        android:layout_height="41dp"
+        android:layout_marginStart="188dp"
+        android:layout_marginEnd="190dp"
+        android:layout_marginBottom="142dp"
+        android:contentDescription="@string/temp_particle"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/particle" />
+
+    <ImageView
+        android:id="@+id/particle4"
+        android:layout_width="33dp"
+        android:layout_height="41dp"
+        android:layout_marginStart="18dp"
+        android:layout_marginTop="112dp"
+        android:layout_marginEnd="360dp"
+        android:contentDescription="@string/temp_particle"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/particle" />
+
+    <ImageView
+        android:id="@+id/particle3"
+        android:layout_width="33dp"
+        android:layout_height="41dp"
+        android:layout_marginTop="112dp"
+        android:layout_marginEnd="25dp"
+        android:contentDescription="@string/temp_particle"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/particle" />
+
+    <ImageView
         android:id="@+id/particle"
         android:layout_width="34dp"
         android:layout_height="41dp"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="39dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="36dp"
         android:contentDescription="@string/temp_particle"
+        android:visibility="invisible"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/temppart" />
+        app:srcCompat="@drawable/particle" />
 
     <ImageView
         android:id="@+id/particle2"
-        android:layout_width="34dp"
+        android:layout_width="33dp"
         android:layout_height="41dp"
         android:layout_marginStart="293dp"
         android:layout_marginTop="36dp"
         android:layout_marginEnd="25dp"
         android:contentDescription="@string/temp_particle"
+        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/particle"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/temppart" />
+        app:srcCompat="@drawable/particle" />
 
     <Button
         android:id="@+id/button"
@@ -38,7 +81,7 @@
         android:layout_marginStart="175dp"
         android:layout_marginEnd="148dp"
         android:layout_marginBottom="16dp"
-        android:onClick="moveRight"
+        android:onClick="move"
         android:text="@string/Start"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

@@ -9,7 +9,7 @@ public class Particle {
     private float velocity;
 
     /** Colour of the Particle */
-    private String color;
+    private int part;
 
     /** Radius of the Particle, Unit: m */
     private float radius;
@@ -32,7 +32,7 @@ public class Particle {
     /**
      * @param mass Mass of the Particle (kg)
      * @param velocity Velocity of the Particle (m/s)
-     * @param color Color of the Particle
+     * @param part color
      * @param radius Radius of the Particle (m)
      * @param xDir Direction x
      * @param yDir Direction y
@@ -40,11 +40,11 @@ public class Particle {
      * @param yPos Position y
      * @param elastic if Particle is elastic
      */
-    Particle(float mass, float velocity, String color, float radius, float xDir, float yDir,
+    Particle(float mass, float velocity, int part, float radius, float xDir, float yDir,
              float xPos, float yPos, boolean elastic) {
         this.mass = mass;
         this.velocity = velocity;
-        this.color = color;
+        this.part = part;
         this.radius = radius;
         this.xDir = xDir;
         this.yDir = yDir;
@@ -67,14 +67,6 @@ public class Particle {
 
     public void setVelocity(float velocity) {
         this.velocity = velocity;
-    }
-
-    public String getColor() {
-        return color;
-    }
-
-    public void setColor(String color) {
-        this.color = color;
     }
 
     public float getRadius() {
@@ -123,5 +115,13 @@ public class Particle {
 
     public void setElastic(boolean elastic) {
         this.elastic = elastic;
+    }
+
+    public int getPart() {
+        return part;
+    }
+
+    public void setPart(int part) {
+        this.part = part;
     }
 }
