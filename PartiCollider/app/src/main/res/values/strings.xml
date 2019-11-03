@@ -3,4 +3,5 @@
     <string name="temp_particle">This is a temp particle</string>
     <string name="Start">start</string>
     <string name="reverse">reverse</string>
+    <string name="pause">Pause</string>
 </resources>

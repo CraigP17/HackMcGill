@@ -26,6 +26,10 @@ public class MainActivity extends AppCompatActivity {
     private ImageView particle4;
     private ImageView particle5;
 
+    public int width;
+    public int height;
+
+    public boolean started = true;
 
     Particle part1 = new Particle(1,1,1,1,1,1,1,1,true);
     Particle part2 = new Particle(2,2,2, 2, -2, 2, 2,2, true);
@@ -49,8 +53,8 @@ public class MainActivity extends AppCompatActivity {
         Display display = getWindowManager().getDefaultDisplay();
         Point size = new Point();
         display.getSize(size);
-        int width = size.x;
-        int height = size.y;
+        width = size.x;
+        height = size.y;
 
         particles.add(part1);
         particles.add(part2);
@@ -59,8 +63,16 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    public void update(View view) {
+        for (int i =0;i<500;i+=10) {
+            checkCollision();
+            move();
+            checkCollision();
+        }
+    }
 
-    public void move(View view) {
+
+    public void move() {
         helper();
     }
 
@@ -75,7 +87,6 @@ public class MainActivity extends AppCompatActivity {
         for (Particle p : particles) {
 
             Path path1 = new Path();
-            System.out.println("IN LOOPS");
             path1.setLastPoint(p.getxPos(), p.getyPos());
 
             path1.lineTo(p.getxPos() + p.getxDir(), p.getyPos() + p.getyDir());
@@ -86,7 +97,6 @@ public class MainActivity extends AppCompatActivity {
                 long temp = (long) (1000 / p.getVelocity());
                 anim.setDuration(temp);
                 //anim.start();
-                System.out.println("MOVE ONE");
             } else if (p.getPart() == 2) {
                 anim1 = ObjectAnimator.ofFloat(particle2,
                         "translationX", "translationY", path1);
@@ -148,10 +158,8 @@ public class MainActivity extends AppCompatActivity {
     /**
      * Checks whether there is a collision between two particles or a particle and a screen wall
      *
-     * @param width of the Phone screen canvas
-     * @param height of the Phone screen canvas
      */
-    void checkCollision(int width, int height) {
+    void checkCollision() {
         for (int i=0; i<size; i++) {
             for (int j=0; j<size; j++) {
                 if (i != j) {
@@ -160,9 +168,10 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
             }
+            Particle partisan = particles.get(i);
             // Check if Particle has collided with the Left/Right Wall
-            if (touchedLRWall(particles.get(i), width)) {
-                calc.collideLR(particles.get(i));
+            if (touchedLRWall(partisan, width)) {
+                calc.collideLR(partisan);
             }
             // Check if Particle has collided with the Top/Bottom Wall
             if (touchedTBWall(particles.get(i), height)) {
@@ -209,6 +218,7 @@ public class MainActivity extends AppCompatActivity {
         float p1Left = p1.getxDir() - p1Mass;
         float p1Right = p1.getxDir() + p1Mass;
         if (p1Left < 0) {
+            System.out.print("TOUCHED EDGE");
             return true;
         } else return width < p1Right;
     }
@@ -225,5 +235,9 @@ public class MainActivity extends AppCompatActivity {
         if (p1Top < 0) {
             return true;
         } else return height < p1Bottom;
+    }
+
+    public void pause(View view) {
+        started = !started;
     }
 }
