@@ -30,9 +30,9 @@ public class MainActivity extends AppCompatActivity {
 
     public boolean started = true;
 
-    Particle part1 = new Particle(1,1,1,1,10,10,1,1,true);
-    Particle part2 = new Particle(2,2,2, 2, -2, 2, 20,20, true);
-    Particle part3 = new Particle(3,1,3, 2, -2, 2, 30,40, true);
+    Particle part1 = new Particle(1,1,1,1,1,5,5,5,true);
+    Particle part2 = new Particle(1,2,2, 2, -4, 3, 50,250, true);
+    Particle part3 = new Particle(1,1,3, 2, -1, 4, 300,650, true);
     ArrayList<Particle> particles = new ArrayList<>();
 
     Calculator calc = new Calculator();
@@ -70,15 +70,12 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void update(View view) {
-        System.out.println(part1.getxPos());
-        System.out.println(width);
-        System.out.println(height);
+        //System.out.println(part1.getxPos());
+        //System.out.println(width);
+        //System.out.println(height);
         //System.out.println(part1.getyPos());
-        for (int i =0;i<500;i+=10) {
-            checkCollision();
-            move();
-            checkCollision();
-        }
+        checkCollision();
+        move();
     }
 
 
@@ -100,12 +97,16 @@ public class MainActivity extends AppCompatActivity {
             path1.lineTo(p.getxPos() + p.getxDir(), p.getyPos() + p.getyDir());
 
             if (p.getPart() == 1) {
+                System.out.print("p1:");
+                System.out.println(p.getxDir());
                 anim = ObjectAnimator.ofFloat(particle1,
                         "translationX", "translationY", path1);
                 long temp = (long) (1000 / p.getVelocity());
                 anim.setDuration(temp);
                 //anim.start();
             } else if (p.getPart() == 2) {
+                System.out.print("p2:");
+                System.out.println(p.getxDir());
                 anim1 = ObjectAnimator.ofFloat(particle2,
                         "translationX", "translationY", path1);
                 long temp = (long) (1000 / p.getVelocity());
@@ -156,26 +157,30 @@ public class MainActivity extends AppCompatActivity {
         //System.out.println(size);
         for (int i=0; i<size; i++) {
             //System.out.println(i);
-            for (int j=0; j<size; j++) {
-                //System.out.println(j);
-                if (i != j) {
-                    if (hasOverlap(particles.get(i), particles.get(j))) {
-                        calc.finalVel(particles.get(i), particles.get(j));
-                    }
-                }
-            }
+//            for (int j=0; j<size; j++) {
+//                //System.out.println(j);
+//                if (i != j) {
+//                    if (hasOverlap(particles.get(i), particles.get(j))) {
+//                        calc.finalVel(particles.get(i), particles.get(j));
+//                    }
+//                }
+//            }
             Particle partisan = particles.get(i);
             // Check if Particle has collided with the Left/Right Wall
-            System.out.println(particles.get(i).getxPos());
-            System.out.println(width);
+            //System.out.println(particles.get(i).getxPos());
+            //System.out.println(width);
             if (touchedLRWall(partisan, width)) {
-                System.out.println("LR");
-                calc.collideLR(partisan);
+                //System.out.println("LR");
+                //System.out.println(partisan.getxDir());
+                partisan.setxDir(-partisan.getxDir());
+                //System.out.println(partisan.getxDir());
+                //calc.collideLR(partisan);
             }
             // Check if Particle has collided with the Top/Bottom Wall
             if (touchedTBWall(particles.get(i), height)) {
-                System.out.println("TB");
-                calc.collideTopBot(particles.get(i));
+                //System.out.println("TB");
+                partisan.setyDir(-partisan.getyDir());
+                //calc.collideTopBot(particles.get(i));
             }
         }
     }
