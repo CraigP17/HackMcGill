@@ -20,6 +20,8 @@ public class MainActivity extends AppCompatActivity {
     Particle part2 = new Particle(2,2,"green", 2, 2, 2, 2,2, true);
     ArrayList<Particle> particles = new ArrayList<>();
 
+    Calculator calc = new Calculator();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,17 +76,17 @@ public class MainActivity extends AppCompatActivity {
             for (int j=0; j<size; j++) {
                 if (i != j) {
                     if (hasOverlap(particles.get(i), particles.get(j))) {
-                        // Collision Occurred
+                        calc.finalVel(particles.get(i), particles.get(j));
                     }
                 }
             }
             // Check if Particle has collided with the Left/Right Wall
             if (touchedLRWall(particles.get(i), width)) {
-                // Flip
+                calc.collideLR(particles.get(i));
             }
             // Check if Particle has collided with the Top/Bottom Wall
             if (touchedTBWall(particles.get(i), height)) {
-                // Flip
+                calc.collideTopBot(particles.get(i));
             }
         }
     }
