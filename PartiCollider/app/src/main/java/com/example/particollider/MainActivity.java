@@ -8,10 +8,15 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity {
     private ImageView particle;
     private int x = 2;
     private int y = 2;
+    Particle part1 = new Particle(1,1,"red",1,1,1,1,1,true);
+    Particle part2 = new Particle(2,2,"green", 2, 2, 2, 2,2, true);
+    ArrayList<Particle> particles = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,6 +25,8 @@ public class MainActivity extends AppCompatActivity {
 
         particle = findViewById(R.id.particle);
         particle.setImageResource(R.drawable.particle);
+        particles.add(part1);
+        particles.add(part2);
 
     }
 
