@@ -24,6 +24,9 @@ public class MainActivity extends AppCompatActivity {
     private ImageView particle1;
     private ImageView particle2;
     private ImageView particle3;
+    private ImageView particle4;
+    private ImageView particle5;
+
 
 
     public int width;
@@ -31,9 +34,12 @@ public class MainActivity extends AppCompatActivity {
 
     public boolean started = true;
 
-    Particle part1 = new Particle(1,1,1,1,1,5,5,5,true);
-    Particle part2 = new Particle(1,2,2, 2, -4, 3, 50,250, true);
-    Particle part3 = new Particle(1,1,3, 2, -1, 4, 300,650, true);
+    Particle part1 = new Particle(1,1,1,1,30,40,500,100,true);
+    Particle part2 = new Particle(1,2,2, 2, -40, 60, 700,150, true);
+    Particle part3 = new Particle(1,1,3, 2, 50, -70, 120,1100, true);
+    Particle part4 = new Particle(1,2,4, 2, 0, -80, 500,1300, true);
+    Particle part5 = new Particle(1,4,5, 2, -40, -70, 800,1200, true);
+
     ArrayList<Particle> particles = new ArrayList<>();
 
     Calculator calc = new Calculator();
@@ -55,6 +61,14 @@ public class MainActivity extends AppCompatActivity {
         particle3.setY(part3.getyPos());
         particle3.setX(part3.getxPos());
 
+        particle4 = findViewById(R.id.particle4);
+        particle4.setY(part4.getyPos());
+        particle4.setX(part4.getxPos());
+
+        particle5 = findViewById(R.id.particle5);
+        particle5.setY(part5.getyPos());
+        particle5.setX(part5.getxPos());
+
         // Finds the width and height of the screen
         Display display = getWindowManager().getDefaultDisplay();
         Point size = new Point();
@@ -65,6 +79,8 @@ public class MainActivity extends AppCompatActivity {
         particles.add(part1);
         particles.add(part2);
         particles.add(part3);
+        particles.add(part4);
+        particles.add(part5);
         updateVisible();
 
     }
@@ -89,6 +105,8 @@ public class MainActivity extends AppCompatActivity {
         ObjectAnimator anim = null;
         ObjectAnimator anim1 = null;
         ObjectAnimator anim2 = null;
+        ObjectAnimator anim3 = null;
+        ObjectAnimator anim4 = null;
 
         for (Particle p : particles) {
 
@@ -121,13 +139,28 @@ public class MainActivity extends AppCompatActivity {
                 anim2.setDuration(temp);
                 //anim2.start();
             }
+            else if (p.getPart() == 4) {
+                anim3 = ObjectAnimator.ofFloat(particle4,
+                        "translationX", "translationY", path1);
+                long temp = (long) (1000 / p.getVelocity());
+                anim3.setDuration(temp);
+                //anim2.start();
+            }
+
+            else if (p.getPart() == 5) {
+                anim4 = ObjectAnimator.ofFloat(particle5,
+                        "translationX", "translationY", path1);
+                long temp = (long) (1000 / p.getVelocity());
+                anim4.setDuration(temp);
+                //anim2.start();
+            }
 
             p.setxPos(p.getxPos() + p.getxDir());
             p.setyPos(p.getyPos() + p.getyDir());
 
 
         }
-        set.play(anim).with(anim1).with(anim2).after(0);
+        set.play(anim).with(anim1).with(anim2).with(anim3).with(anim4).after(0);
         set.start();
     }
 
@@ -142,6 +175,12 @@ public class MainActivity extends AppCompatActivity {
             }
             if(i ==3){
                 particle3.setVisibility(View.VISIBLE);
+            }
+            if(i ==4){
+                particle4.setVisibility(View.VISIBLE);
+            }
+            if(i ==5){
+                particle5.setVisibility(View.VISIBLE);
             }
         }
     }
