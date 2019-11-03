@@ -52,11 +52,13 @@
         android:id="@+id/button2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginBottom="43dp"
-        android:onClick="pause"
-        android:text="@string/pause"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="43dp"
+        android:layout_marginBottom="16dp"
+        android:onClick="showVelocities"
+        android:text="@string/Velocities"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/button"
         app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationSet;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -74,11 +75,10 @@ public class MainActivity extends AppCompatActivity {
         System.out.println(width);
         System.out.println(height);
         //System.out.println(part1.getyPos());
-        for (int i =0;i<500;i+=10) {
-            checkCollision();
-            move();
-            checkCollision();
-        }
+
+        checkCollision();
+        move();
+        checkCollision();
     }
 
 
@@ -245,5 +245,15 @@ public class MainActivity extends AppCompatActivity {
 
     public void pause(View view) {
         started = !started;
+    }
+
+    public void showVelocities(View view){
+        Toast toast=Toast.makeText(getApplicationContext(),"Vp1: "+
+                        String.valueOf(part1.getVelocity()) + " xPos" +String.valueOf(part1.getxPos())+
+                " yPos:" + String.valueOf(part1.getyPos()) + "\n Vp2: " + String.valueOf(part2.getVelocity()) + " xPos" +String.valueOf(part1.getxPos())+
+                " yPos:" + String.valueOf(part1.getyPos())+
+                        "\n Vp3 " + String.valueOf(part3.getVelocity()) + " xPos" +String.valueOf(part1.getxPos())+
+                " yPos:" + String.valueOf(part1.getyPos()), Toast.LENGTH_LONG);
+        toast.show();
     }
 }
