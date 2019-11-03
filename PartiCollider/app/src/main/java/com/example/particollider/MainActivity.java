@@ -31,9 +31,9 @@ public class MainActivity extends AppCompatActivity {
 
     public boolean started = true;
 
-    Particle part1 = new Particle(1,1,1,1,1,1,1,1,true);
-    Particle part2 = new Particle(2,2,2, 2, -2, 2, 2,2, true);
-    Particle part3 = new Particle(3,1,3, 2, -2, 2, 3,4, true);
+    Particle part1 = new Particle(1,1,1,1,10,10,1,1,true);
+    Particle part2 = new Particle(2,2,2, 2, -2, 2, 20,20, true);
+    Particle part3 = new Particle(3,1,3, 2, -2, 2, 30,40, true);
     ArrayList<Particle> particles = new ArrayList<>();
 
     Calculator calc = new Calculator();
@@ -63,7 +63,12 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+
     public void update(View view) {
+        System.out.println(part1.getxPos());
+        System.out.println(width);
+        System.out.println(height);
+        //System.out.println(part1.getyPos());
         for (int i =0;i<500;i+=10) {
             checkCollision();
             move();
@@ -154,14 +159,19 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    int size = particles.size();
+
     /**
      * Checks whether there is a collision between two particles or a particle and a screen wall
      *
      */
     void checkCollision() {
+        int size = particles.size();
+        //System.out.println("HI");
+        //System.out.println(size);
         for (int i=0; i<size; i++) {
+            //System.out.println(i);
             for (int j=0; j<size; j++) {
+                //System.out.println(j);
                 if (i != j) {
                     if (hasOverlap(particles.get(i), particles.get(j))) {
                         calc.finalVel(particles.get(i), particles.get(j));
@@ -170,11 +180,15 @@ public class MainActivity extends AppCompatActivity {
             }
             Particle partisan = particles.get(i);
             // Check if Particle has collided with the Left/Right Wall
+            System.out.println(particles.get(i).getxPos());
+            System.out.println(width);
             if (touchedLRWall(partisan, width)) {
+                System.out.println("LR");
                 calc.collideLR(partisan);
             }
             // Check if Particle has collided with the Top/Bottom Wall
             if (touchedTBWall(particles.get(i), height)) {
+                System.out.println("TB");
                 calc.collideTopBot(particles.get(i));
             }
         }
@@ -217,10 +231,16 @@ public class MainActivity extends AppCompatActivity {
         float p1Mass = p1.getMass();
         float p1Left = p1.getxDir() - p1Mass;
         float p1Right = p1.getxDir() + p1Mass;
+        //System.out.println(String.valueOf(width)+String.valueOf(p1Right));
         if (p1Left < 0) {
             System.out.print("TOUCHED EDGE");
             return true;
-        } else return width < p1Right;
+        } else if (p1Right > (float) width) {
+            System.out.println("Right");
+            return true;
+        } else {
+            return width < p1Right;
+        }
     }
 
     /**

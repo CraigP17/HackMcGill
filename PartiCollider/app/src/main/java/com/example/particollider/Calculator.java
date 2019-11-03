@@ -23,7 +23,7 @@ class Calculator {
         float p2py=p2.getyPos();
         float p1vxf, p1vyf, p2vxf, p2vyf;
 
-        //checking if a particle is inelastics
+        //checking if a particle is inelastic
         if (p1.isElastic() || p2.isElastic()) {
             p1vxf=(p1m*p1vx+p2m*p2vx)/(p1m+p2m); //final x velocity of the combined particles
             p1vyf=(p1m*p1vy+p2m*p2vy)/(p1m+p2m); //final y velocity of the combined particles
